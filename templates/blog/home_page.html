@@ -1,0 +1,9 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <h2>Home page</h2>
+    {{ title }}
+    {% for a in list %}
+        <li>{{a}}</li>
+    {% endfor %}
+{% endblock content %}
+
