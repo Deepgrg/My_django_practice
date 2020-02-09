@@ -1,8 +1,10 @@
-from django.shortcuts import render , get_object_or_404
+from django.shortcuts import render , get_object_or_404 , redirect
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .models import Posts
-from .form import PostsForm,PostsModelForm
+from .form import PostsModelForm
 
 
 def blog_post_list_view(request):
@@ -14,14 +16,14 @@ def blog_post_list_view(request):
     }
     return render(request , "posts/blog_post_list_view.html" , context)
 
-
+@login_required
 def blog_post_create_view(request):
-    # Create objects
-    # Use forms ?
     form = PostsModelForm(request.POST or None)
     if form.is_valid():
-        form.save()
-        form= PostsModelForm()
+        obj=form.save(commit = False)
+        obj.user = request.user
+        obj.save()
+        return redirect('posts-list')
     context = {
         'form':form,
     }
@@ -29,24 +31,31 @@ def blog_post_create_view(request):
 
 
 def blog_post_detail_view(request, slug):
-    # 1 object -> details
-    obj = get_object_or_404(Posts , slug = slug)
-    context = {
-        "object" : obj,
+    the_post = get_object_or_404(Posts , slug=slug)
+    context ={
+        "object" : the_post
     }
-    return render(request, "posts/blog_post_detail_view.html" , context)
+    return render(request , "posts/blog_post_detail_view.html" , context)
 
-
+@login_required
 def blog_post_update_view(request , slug):
-    obj = get_object_or_404(Posts , slug = slug)
+    obj = get_object_or_404(Posts , slug = slug )
+    form = PostsModelForm(request.POST or None , instance = obj)
+    if form.is_valid():
+        form.save()
+        return redirect("posts-detail",slug=obj.slug)
     context = {
-        "object" : obj,
+        "form" : form,
+        "title" : f"Update {obj.title}",
     }
     return render(request , 'posts/blog_post_update_view.html' , context)
 
-
+@login_required
 def blog_post_delete_view(request , slug ):
     obj = get_object_or_404(Posts , slug = slug)
+    if request.method =="POST":
+        obj.delete()
+        return redirect("posts-list")
     context = {
         "object" : obj,
     }

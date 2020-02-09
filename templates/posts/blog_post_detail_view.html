@@ -3,5 +3,9 @@
 
     <h2>{{object.title}}</h2>
     <p>{{object.content}}</p>
-
+    <br>
+    <a href = {% url 'posts-list' %} >Go back</a>
+    <br><br>
+    <a href = {% url 'posts-update' object.slug %} >Update the post</a><br>
+    <a href = {% url 'posts-delete' object.slug %} >Delete the post</a>
 {% endblock content %}
