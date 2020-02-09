@@ -37,7 +37,7 @@ def blog_post_detail_view(request, slug):
     return render(request, "posts/blog_post_detail_view.html" , context)
 
 
-def blog_post_update_view(slug , request):
+def blog_post_update_view(request , slug):
     obj = get_object_or_404(Posts , slug = slug)
     context = {
         "object" : obj,
@@ -45,7 +45,7 @@ def blog_post_update_view(slug , request):
     return render(request , 'posts/blog_post_update_view.html' , context)
 
 
-def blog_post_delete_view(slug , request):
+def blog_post_delete_view(request , slug ):
     obj = get_object_or_404(Posts , slug = slug)
     context = {
         "object" : obj,
