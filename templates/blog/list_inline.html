@@ -1,0 +1,17 @@
+
+<div class = 'col-12 col-md-7 mb-4 mx-auto' >
+    <div class = 'card-body'>
+        <a href = {% url 'posts-detail' posts.slug %} ><h5 class = 'card-title'>{{ posts.title }}</h5></a>
+        <p class="card-text" >
+
+            {% if truncate %}
+                {{posts.content|linebreaks|truncatewords:30}}
+            {% else %}
+                {{posts.content |linebreaks}}
+            {% endif %}
+        </p>
+        {% if not detail %}
+            <a href= {% url 'posts-detail' posts.slug %}>Read more...</a>
+        {% endif %}
+    </div>
+</div>

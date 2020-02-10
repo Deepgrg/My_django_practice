@@ -1,9 +1,11 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    <h2>Home page</h2>
-    {{ title }}
-    {% for a in list %}
-        <li>{{a}}</li>
+
+    <h2>{{ title }}</h2>
+
+    {% for a in posts %}
+        {% include 'blog/list_inline.html' with posts=a  truncate=True detail=False %}
     {% endfor %}
+
 {% endblock content %}
 

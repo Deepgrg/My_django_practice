@@ -1,8 +1,9 @@
 {% extends 'blog/base.html' %}
 {% block content %}
     <h2>Your posts </h2><br><br>
-    {% for object in object_list %}
-        <a href= {% url 'posts-detail' object.slug %}><li>{{object.title}}</li></a>
-    {% endfor %}
-
+    <div class="row">
+        {% for object in object_list %}
+            {% include 'blog/list_inline.html' with posts=object truncate=True %}
+        {% endfor %}
+    </div>        
 {% endblock content %}
