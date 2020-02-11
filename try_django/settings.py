@@ -121,4 +121,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+# For development purpose only !!!
+
+STATIC_URL = '/static/' # A url to access the static files
+MEDIA_URL = '/media/'   # A url to access the static images 
+
+STATICFILES_DIRS = [
+    # These are the local directories within the project from where the django collects the static fiels
+    os.path.join( BASE_DIR , 'static'), # The place where django looks when collecting the static files 
+    os.path.join( BASE_DIR , 'media')  # The place where django looks when collecting medai static files
+]
+# These are the directories where django stores the static files after collecting the static files
+STATIC_ROOT = os.path.join(BASE_DIR , 'static_cdn')  # The root documnet directory to store the static files
+MEDIA_ROOT = os.path.join(BASE_DIR , 'media_cdn') # The root document directory to store the media static files 
+
+
+# Types of static files
+
+# Type 1 -> That rarely changes such as css , js and logos files and images
+# Type 2 -> That changes frequently such as users profilepic ,  blog posts images 
+
+# Type 1 static files are generally stored in the web server 
+# Type 2 static files are served by cdn's like AWS 
+
