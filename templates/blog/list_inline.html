@@ -1,6 +1,11 @@
 
 <div class = 'col-12 col-md-7 mb-4 mx-auto' >
     <div class = 'card-body'>
+        {% if posts.image %}
+        <a href= {% url 'posts-detail' posts.slug %}>
+            <img src ="{{posts.image.url}}" class = "card-img-top" />
+        </a>
+        {% endif %}    
         <a href = {% url 'posts-detail' posts.slug %} ><h5 class = 'card-title'>{{ posts.title }}</h5></a>
         <p class="card-text" >
 

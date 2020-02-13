@@ -18,7 +18,7 @@ class PostsManager(models.Manager):
 class Posts(models.Model):
     user = models.ForeignKey(User , on_delete=models.CASCADE , default = 1)
     title = models.CharField(max_length=100)
-    image = models.FileField(upload_to = 'media' , blank = True , null = True)
+    image = models.ImageField(upload_to = 'media' , blank = True , null = True)
     slug = models.SlugField(unique = True )
     content = models.TextField(null=True , blank = True)
     publish_date = models.DateTimeField(auto_now=False , auto_now_add=False, null=True , blank = True)

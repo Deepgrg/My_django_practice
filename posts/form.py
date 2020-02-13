@@ -11,7 +11,7 @@ class PostsForm(forms.Form):
 class PostsModelForm(forms.ModelForm):
     class Meta:
         model = Posts
-        fields =['title' , 'slug' , 'content' , 'publish_date']
+        fields =['title' ,'image' ,  'slug' , 'content' , 'publish_date']
 
     def clean_title(self , *args , **kwargs):
         title = self.cleaned_data.get('title')
