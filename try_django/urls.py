@@ -3,12 +3,14 @@ from django.urls import path,re_path,include
 from posts import views as posts_views
 from django.conf import settings
 
+from searches.views import search_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('' , include('blog.urls')),
     path('post/newpost/' , posts_views.blog_post_create_view , name ="posts-create"),
     path('post/' , include('posts.urls')),
+    path('search/', search_view , name ='the-search' ),
 ]
 
 if settings.DEBUG: 
