@@ -1,12 +1,13 @@
 
 <div class = 'col-12 col-md-7 mb-4 mx-auto' >
     <div class = 'card-body'>
+            
+        <a href = {% url 'posts-detail' posts.slug %} ><h5 class = 'card-title'>{{ posts.title }}</h5></a>
         {% if posts.image %}
         <a href= {% url 'posts-detail' posts.slug %}>
             <img src ="{{posts.image.url}}" class = "card-img-top" />
         </a>
-        {% endif %}    
-        <a href = {% url 'posts-detail' posts.slug %} ><h5 class = 'card-title'>{{ posts.title }}</h5></a>
+        {% endif %}
         <p class="card-text" >
 
             {% if truncate %}

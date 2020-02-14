@@ -3,7 +3,7 @@
     <h2>Your posts </h2><br><br>
     <div class="row">
         {% for object in object_list %}
-            {% include 'blog/list_inline.html' with posts=object truncate=True %}
+            {% include 'blog/list_inline.html' with posts=object truncate=True detail=False %}
         {% endfor %}
     </div>        
 {% endblock content %}
